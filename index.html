@@ -1,15 +1,251 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이춘식 | Portfolio</title>
+    <link rel="icon" href="./favicon.png" type="image/png">
+    <!-- 구글 폰트 (Pretendard 추천하지만 기본 폰트도 깔끔하게 설정) -->
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+    <!-- 아이콘 사용을 위한 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+
+        /* 왼쪽 사이드바 (프로필 & 기술스택) */
+        .sidebar {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 40px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            background: #ddd;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            /* 실제 이미지가 있다면 아래 주석 해제 */
+            /* background-image: url('이미지주소'); background-size: cover; */
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+        }
+
+        .contact-info a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .badge {
+            background: #eff6ff;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .tool-badge {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        /* 오른쪽 메인 콘텐츠 (소개 & 프로젝트) */
+        .main-content {
+            flex: 2;
+            min-width: 350px;
+        }
+
+        .intro-section {
+            margin-bottom: 50px;
+        }
+
+        .intro-section h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                min-width: 100%;
+            }
+
+            .profile-card {
+                position: static;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>
-        이춘식의 포트폴리오입니다 !
-    </h1>
+
+<div class="container">
+    <!-- 왼쪽 사이드바 -->
+    <aside class="sidebar">
+        <div class="profile-card">
+            <div class="profile-img">
+                <!-- 이미지가 없을 경우를 대비한 아이콘 -->
+                <i class="fa-solid fa-user" style="font-size: 50px; color: #aaa; padding: 35px;"></i>
+            </div>
+            <h2 class="name">이춘식</h2>
+            <div class="contact-info">
+                <a href="mailto:chunsik@example.com"><i class="fa-regular fa-envelope"></i> chunsik@example.com</a>
+                <a href="https://github.com/SeoYunn" target="_blank"><i class="fa-brands fa-github"></i>
+                    github.com/SeoYunn</a>
+            </div>
+
+            <h3 class="section-title">Technical Skill</h3>
+            <div class="badge-container">
+                <span class="badge">JavaScript</span>
+                <span class="badge">TypeScript</span>
+                <span class="badge">Node.js</span>
+                <span class="badge">NestJS</span>
+            </div>
+
+            <h3 class="section-title">Collaboration</h3>
+            <div class="badge-container">
+                <span class="badge tool-badge">Notion</span>
+                <span class="badge tool-badge">Slack</span>
+                <span class="badge tool-badge">Jira</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 오른쪽 메인 콘텐츠 -->
+    <main class="main-content">
+        <section class="intro-section">
+            <h1>안녕하세요, <br><span style="color: var(--primary-color);">효율적인 백엔드</span>를 지향하는 이춘식입니다.</h1>
+            <p>
+                NestJS와 TypeScript를 활용하여 확장성 있는 시스템을 설계하는 것에 관심이 많습니다.
+                단순히 코드를 짜는 것을 넘어, 협업 툴을 활용해 팀원들과 원활하게 소통하며 문제를 해결하는 과정을 즐깁니다.
+            </p>
+        </section>
+
+        <section>
+            <h3 class="section-title" style="font-size: 22px; margin-bottom: 25px;">Project History</h3>
+            <div class="project-grid">
+                <!-- 프로젝트 1 -->
+                <article class="project-card">
+                    <h4 class="project-title">프로젝트 이름 A</h4>
+                    <p class="project-desc">프로젝트에 대한 간단한 설명을 적어주세요. 사용한 기술이나 본인이 담당한 핵심 역할을 한두 문장으로 요약하면 좋습니다.</p>
+                </article>
+
+                <!-- 프로젝트 2 -->
+                <article class="project-card">
+                    <h4 class="project-title">프로젝트 이름 B</h4>
+                    <p class="project-desc">어떤 문제를 해결했는지 혹은 어떤 성과를 냈는지 설명해 보세요. NestJS를 활용한 API 설계 등의 내용을 담으면 좋습니다.</p>
+                </article>
+
+                <!-- 프로젝트 3 -->
+                <article class="project-card">
+                    <h4 class="project-title">프로젝트 이름 C</h4>
+                    <p class="project-desc">협업 툴(Jira, Slack)을 어떻게 활용하여 프로젝트를 완수했는지 기술적인 내용과 함께 적어보세요.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+</div>
+
 </body>
 </html>
