@@ -25,7 +25,6 @@ author: 이서윤(a.k.a 이춘식)
 author_bio: 안녕하세요. 춘식이를 너무 좋아하는 개발자 이서윤입니다.
 author_email: "nanechoonsik@gmail.com"
 author_location: Daejeon, South Korea
-author_website_url: "https://sujaykundu.com"
 typewrite-text: devlopr is a jekyll framework built for developers. You can edit this in _config.yml file
 hero_cover_img: sample_cover.jpg # replace this for changing homepage cover (eg. try cover.jpeg). Image should be in /assets/img
 
@@ -54,29 +53,20 @@ author_education_details:
                 visibility: true
 
 # Projects
-author_project_details:
-              - project_thumbnail: gamershub.png
-                project_title: Gamers Hub
-                project_description: A Platform built for Gamers and Game Devs
-                project_url: https://gamershub.in
-                visibility: true
-              - project_thumbnail: hack4r.PNG
-                project_title: Hack4r
-                project_description: A Platform built for Hackers and Penetration Testers
-                project_url: https://hack4r.com
-                visibility: true
+#author_project_details:
+#              - project_thumbnail: gamershub.png
+#                project_title: Gamers Hub
+#                project_description: A Platform built for Gamers and Game Devs
+#                project_url: https://gamershub.in
+#                visibility: true
+#              - project_thumbnail: hack4r.PNG
+#                project_title: Hack4r
+#                project_description: A Platform built for Hackers and Penetration Testers
+#                project_url: https://hack4r.com
+#                visibility: true
 
 # social links
-twitter_username: xplor4r
-github_username:  sujaykundu777
-instagram_username: xplor4r
-# facebook_username: johndoe
-# linkedin_username: johndoe
-# behance_username: johndoe
-# medium_username: johndoe
-# telegram_username: johndoe
-# dribbble_username: johndoe
-# flickr_username: johndoe
+github_username:  SeoYunnn
 
 #for comments ( we got Disqus and Hyvor Commenting, uncomment the one you want to use )
 
@@ -84,7 +74,7 @@ instagram_username: xplor4r
 # hyvor_talk_website_id: 476
 
 # wakatime username (coding activity)
-wakatime_username: sujaykundu777
+# wakatime_username: sujaykundu777
 
 # mailchimp embedded form url (newsletter):
 mailchimp_form_url: https://sujaykundu.us10.list-manage.com/subscribe/post?u=50bab1c85eae24ecfb0f68361&amp;id=3a2dd721d0
