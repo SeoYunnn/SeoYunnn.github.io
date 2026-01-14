@@ -3,33 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이춘식 | Portfolio</title>
+    <title>이서윤 | Portfolio</title>
     <link rel="icon" href="./favicon.png" type="image/png">
-    <!-- 구글 폰트 (Pretendard 추천하지만 기본 폰트도 깔끔하게 설정) -->
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
-    <!-- 아이콘 사용을 위한 Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3b82f6;
+            --point-yellow: #f59e0b;
+            --bg-yellow: #fefce8;
+            --text-yellow: #b45309;
+            --project-dark: #334155;
+            --project-light: #64748b;
             --bg-color: #f8fafc;
             --text-color: #1e293b;
             --card-bg: #ffffff;
             --border-color: #e2e8f0;
+            --purple-point: #8b5cf6;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-color);
+            /* [배경] 미니멀 도트 패턴 */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 30px 30px;
             color: var(--text-color);
             line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(248, 250, 252, 1) 100%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
@@ -41,7 +69,7 @@
             gap: 40px;
         }
 
-        /* 왼쪽 사이드바 (프로필 & 기술스택) */
+        /* 왼쪽 사이드바 */
         .sidebar {
             flex: 1;
             min-width: 280px;
@@ -50,198 +78,273 @@
         .profile-card {
             background: var(--card-bg);
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
         }
 
         .profile-img {
-            width: 120px;
-            height: 120px;
-            background: #ddd;
+            width: 100%;
+            height: 100%;
+            background: #f1f5f9;
             border-radius: 50%;
-            margin-bottom: 20px;
-            /* 실제 이미지가 있다면 아래 주석 해제 */
-            /* background-image: url('이미지주소'); background-size: cover; */
+            overflow: hidden;
+            border: 2px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        .profile-img img { width: 100%; height: 100%; object-fit: cover; }
 
-        .name {
-            font-size: 24px;
+        .status-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 700;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .contact-info {
-            margin-bottom: 30px;
-        }
+        .name { font-size: 26px; font-weight: 800; margin-bottom: 15px; letter-spacing: -0.5px; }
 
+        .contact-info { margin-bottom: 30px; }
         .contact-info a {
-            display: block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 8px;
-            transition: color 0.2s;
+            display: flex; align-items: center; gap: 10px; color: #475569;
+            text-decoration: none; font-size: 14px; margin-bottom: 12px; transition: 0.3s;
         }
-
-        .contact-info a:hover {
-            color: var(--primary-color);
-        }
+        .contact-info a:hover { color: var(--point-yellow); transform: translateX(5px); }
 
         .section-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid var(--border-color);
+            font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #94a3b8;
+            padding-bottom: 8px; border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .badge-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 25px;
+        .badge-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+
+        .badge { transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: default; }
+        .badge:hover { transform: translateY(-3px) scale(1.05); }
+
+        .badge.tech {
+            background: var(--bg-yellow); color: var(--text-yellow);
+            padding: 5px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; border: 1px solid #fef08a;
+        }
+        .badge.tool {
+            background: #f1f5f9; color: #475569; padding: 5px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
         }
 
-        .badge {
-            background: #eff6ff;
-            color: var(--primary-color);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
+        /* 오른쪽 콘텐츠 */
+        .main-content { flex: 2; min-width: 350px; }
+        .intro-section { margin-bottom: 60px; }
+        .intro-section h1 { font-size: 36px; font-weight: 800; margin-bottom: 24px; line-height: 1.3; letter-spacing: -1px; }
+
+        .highlight {
+            background: linear-gradient(to top, rgba(254, 240, 138, 0.6) 40%, transparent 40%);
+            padding: 0 4px;
         }
 
-        .tool-badge {
-            background: #f1f5f9;
-            color: #475569;
-        }
+        .intro-p { font-size: 18px; margin-bottom: 20px; color: #475569; word-break: keep-all; }
 
-        /* 오른쪽 메인 콘텐츠 (소개 & 프로젝트) */
-        .main-content {
-            flex: 2;
-            min-width: 350px;
-        }
+        /* 프로젝트 */
+        .project-section { margin-bottom: 100px; }
 
-        .intro-section {
-            margin-bottom: 50px;
-        }
-
-        .intro-section h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
+        .project-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
         .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 15px;
-            transition: transform 0.2s;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 35px; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.08);
+            border-color: var(--point-yellow);
         }
 
-        .project-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
+        .project-title { font-size: 24px; font-weight: 800; margin-bottom: 15px; color: var(--project-dark); display: flex; align-items: center; gap: 12px; }
+        .project-desc { color: var(--project-light); font-size: 16px; line-height: 1.8; }
+        .project-list { padding-left: 20px; margin-top: 20px; color: var(--project-light); font-size: 15px; line-height: 1.9; }
 
-        .project-desc {
-            color: #64748b;
-            font-size: 15px;
+        .link-group { display: flex; gap: 20px; margin-top: 25px; }
+        .project-link {
+            display: flex; align-items: center; gap: 6px; color: var(--text-color);
+            text-decoration: none; font-weight: 700; font-size: 14px; transition: 0.2s;
+            padding: 8px 16px; background: #f1f5f9; border-radius: 8px;
+        }
+        .project-link:hover { color: white; background: var(--point-yellow); }
+
+        /* 타임라인 */
+        .timeline { margin-top: 20px; }
+        .timeline-item { position: relative; padding-left: 30px; padding-bottom: 30px; border-left: 2px solid var(--border-color); }
+        .timeline-item::before {
+            content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px;
+            background: white; border: 2px solid var(--point-yellow); border-radius: 50%;
+        }
+        .timeline-date { font-size: 14px; color: #94a3b8; font-weight: 600; margin-bottom: 4px; }
+        .timeline-content { font-weight: 700; font-size: 17px; color: var(--text-color); }
+        .timeline-award {
+            display: inline-block; margin-left: 10px; font-size: 12px; color: #e11d48;
+            background: #fff1f2; padding: 2px 10px; border-radius: 6px; font-weight: 800;
         }
 
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                min-width: 100%;
-            }
-
-            .profile-card {
-                position: static;
-            }
+            .container { flex-direction: column; padding: 20px; }
+            .sidebar { min-width: 100%; }
+            .profile-card { position: static; }
+            .intro-section h1 { font-size: 28px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- 왼쪽 사이드바 -->
     <aside class="sidebar">
         <div class="profile-card">
-            <div class="profile-img">
-                <!-- 이미지가 없을 경우를 대비한 아이콘 -->
-                <i class="fa-solid fa-user" style="font-size: 50px; color: #aaa; padding: 35px;"></i>
+            <div class="profile-img-container">
+                <div class="profile-img">
+                    <img src="https://github.com/SeoYunnn.png" alt="Profile Image">
+                </div>
+                <div class="status-badge">
+                    <div class="status-dot"></div> Active
+                </div>
             </div>
-            <h2 class="name">이춘식</h2>
+
+            <h2 class="name">이서윤</h2>
+
             <div class="contact-info">
-                <a href="mailto:chunsik@example.com"><i class="fa-regular fa-envelope"></i> chunsik@example.com</a>
-                <a href="https://github.com/SeoYunn" target="_blank"><i class="fa-brands fa-github"></i>
-                    github.com/SeoYunn</a>
+                <a href="mailto:nanechoonsik@gmail.com"><i class="fa-regular fa-envelope"></i> nanechoonsik@gmail.com</a>
+                <a href="https://github.com/SeoYunnn" target="_blank"><i class="fa-brands fa-github"></i> github.com/SeoYunnn</a>
             </div>
 
             <h3 class="section-title">Technical Skill</h3>
             <div class="badge-container">
-                <span class="badge">JavaScript</span>
-                <span class="badge">TypeScript</span>
-                <span class="badge">Node.js</span>
-                <span class="badge">NestJS</span>
+                <span class="badge tech">JavaScript</span>
+                <span class="badge tech">TypeScript</span>
+                <span class="badge tech">Node.js</span>
+                <span class="badge tech">NestJS</span>
             </div>
 
-            <h3 class="section-title">Collaboration</h3>
+            <h3 class="section-title">Collaboration Tools</h3>
             <div class="badge-container">
-                <span class="badge tool-badge">Notion</span>
-                <span class="badge tool-badge">Slack</span>
-                <span class="badge tool-badge">Jira</span>
+                <span class="badge tool">Notion</span>
+                <span class="badge tool">Slack</span>
+                <span class="badge tool">Jira</span>
             </div>
         </div>
     </aside>
 
-    <!-- 오른쪽 메인 콘텐츠 -->
     <main class="main-content">
         <section class="intro-section">
-            <h1>안녕하세요, <br><span style="color: var(--primary-color);">효율적인 백엔드</span>를 지향하는 이춘식입니다.</h1>
-            <p>
-                NestJS와 TypeScript를 활용하여 확장성 있는 시스템을 설계하는 것에 관심이 많습니다.
-                단순히 코드를 짜는 것을 넘어, 협업 툴을 활용해 팀원들과 원활하게 소통하며 문제를 해결하는 과정을 즐깁니다.
+            <h1>안녕하세요, <br>
+                <span class="highlight" style="color: var(--point-yellow);">문제 해결과 다양한 경험</span>을 즐기며 성장해나가는 <br>
+                백엔드 개발자 이서윤입니다.
+            </h1>
+
+            <p class="intro-p">
+                <strong>"함께할 때 더 큰 문제를 해결할 수 있다"</strong>는 믿음으로 팀 프로젝트에 임합니다.
+                Notion과 Jira를 활용한 체계적인 문서화를 기반으로 동료들과 원활하게 소통하며, 프로젝트의 완성도를 높이는 과정에서 큰 보람을 느낍니다.
+            </p>
+
+            <p class="intro-p">
+                현재 NestJS와 TypeScript를 기반으로 확장성 있는 시스템을 설계하는 데 집중하고 있으며,
+                기술적 완성도를 높이는 것만큼이나 <strong>문제의 본질을 파악하고 더 나은 해결책을 위해 고민하는 과정</strong>을 중요하게 생각합니다.
             </p>
         </section>
 
-        <section>
-            <h3 class="section-title" style="font-size: 22px; margin-bottom: 25px;">Project History</h3>
+        <section class="project-section">
+            <h3 class="section-title" style="font-size: 22px; margin-bottom: 30px; border: none; color: var(--text-color);">Project History 🚀</h3>
             <div class="project-grid">
-                <!-- 프로젝트 1 -->
+
                 <article class="project-card">
-                    <h4 class="project-title">프로젝트 이름 A</h4>
-                    <p class="project-desc">프로젝트에 대한 간단한 설명을 적어주세요. 사용한 기술이나 본인이 담당한 핵심 역할을 한두 문장으로 요약하면 좋습니다.</p>
+                    <h4 class="project-title">나비잠 🦋</h4>
+                    <p class="project-desc">
+                        <strong>정신건강을 위한 온라인 상담 웹 플랫폼</strong><br>
+                        현대인의 심리적 고통 완화와 상담 인식 개선을 목표로 개발된 온라인 정신상담 플랫폼입니다.
+                    </p>
+                    <div class="badge-container" style="margin-top: 15px;">
+                        <span class="badge tool">NestJS</span><span class="badge tool">PostgreSQL</span><span class="badge tool">WebSocket</span>
+                    </div>
+                    <ul class="project-list">
+                        <li>NestJS와 WebSocket을 활용한 <strong>실시간 온라인 1:1 상담 채팅 시스템</strong> 개발</li>
+                        <li><strong>RBAC</strong>을 적용하여 사용자 및 회원 역할별 페이지 접근 권한 철저 분리</li>
+                        <li>JWT 기반 인증 프로세스를 통해 개인정보의 <strong>보안성 강화</strong></li>
+                    </ul>
+                    <div class="link-group">
+                        <a href="https://github.com/capstone-navijam/navijam-backend" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                        <a href="https://swamp-cushion-307.notion.site/navijam-21a25f20791580f88110ea930b398544" target="_blank" class="project-link"><i class="fa-solid fa-file-lines"></i> Notion</a>
+                    </div>
                 </article>
 
-                <!-- 프로젝트 2 -->
                 <article class="project-card">
-                    <h4 class="project-title">프로젝트 이름 B</h4>
-                    <p class="project-desc">어떤 문제를 해결했는지 혹은 어떤 성과를 냈는지 설명해 보세요. NestJS를 활용한 API 설계 등의 내용을 담으면 좋습니다.</p>
+                    <h4 class="project-title">Wagora <i class="fa-solid fa-comment-dots" style="color: var(--purple-point);"></i></h4>
+                    <p class="project-desc">
+                        <strong>연구실 일정 관리 및 실시간 채팅 서비스</strong><br>
+                        연구실(WiSoft) 내 세미나 및 수업 일정 관리와 실시간 소통을 위해 개발된 시스템입니다.
+                    </p>
+                    <div class="badge-container" style="margin-top: 15px;">
+                        <span class="badge tool">NestJS</span><span class="badge tool">PostgreSQL</span><span class="badge tool">WebSocket</span>
+                    </div>
+                    <ul class="project-list">
+                        <li>NestJS WebSocket을 활용한 <strong>실시간 채팅 및 알림 시스템</strong> 구축</li>
+                        <li>PostgreSQL을 활용한 <strong>효율적인 DB 스키마 설계</strong></li>
+                        <li>JWT 기반의 <strong>사용자 인증 시스템</strong> 및 보안 Guard 적용</li>
+                    </ul>
+                    <div class="link-group">
+                        <a href="https://github.com/wagora-chat/wagora-chat-backend" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
                 </article>
+            </div>
+        </section>
 
-                <!-- 프로젝트 3 -->
-                <article class="project-card">
-                    <h4 class="project-title">프로젝트 이름 C</h4>
-                    <p class="project-desc">협업 툴(Jira, Slack)을 어떻게 활용하여 프로젝트를 완수했는지 기술적인 내용과 함께 적어보세요.</p>
-                </article>
+        <section class="timeline">
+            <h3 class="section-title" style="font-size: 22px; margin-bottom: 30px; border: none; color: var(--text-color);">Experience & Education 🎓</h3>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2025.12.29 ~ 2026.06.19</div>
+                <div class="timeline-content">[Programmers] 9기 웹 풀스택 데브코스 수강</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2021.03.01 ~ 2025.02.14</div>
+                <div class="timeline-content">국립한밭대학교 정보통신공학과 졸업</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2022.12.20 ~ 현재</div>
+                <div class="timeline-content">무선통신소프트웨어연구실(WiSoft) 활동</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.12.18</div>
+                <div class="timeline-content">KSC 2024 Poster 세션 참가 <span class="timeline-award">장려상 입상</span></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.11.29</div>
+                <div class="timeline-content">제13회 정보기술대학 작품전시회 <span class="timeline-award">동상 입상</span></div>
+            </div>
+
+            <div class="timeline-item" style="border: none;">
+                <div class="timeline-date">2021.12.01 ~ 2022.11.30</div>
+                <div class="timeline-content">정보통신공학과 학생회 활동</div>
             </div>
         </section>
     </main>
